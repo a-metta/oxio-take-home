@@ -1,26 +1,34 @@
-import { Column, TableData } from '@customTypes/table';
-import { useState } from 'react';
-import Body from './Body';
-import Head from './Head';
+import { Column, TableData, TableDataEntry } from '@customTypes/table';
+import { useSortableTable } from '@hooks/useSortableTable';
 import './SortableTable.css';
+import TableBody from './TableBody';
+import TableHead from './TableHead';
 
-function SortableTable({
+function SortableTable<Type extends TableDataEntry>({
   columns,
   data,
   caption,
 }: {
   caption?: string;
-  columns: Column[];
+  columns: Column<Type>[];
   data: TableData;
 }) {
-  const [tableData, setTableData] = useState();
-
+  const { sortedData, handleSort, sortColumn, sortDirection } =
+    useSortableTable<Type>({
+      data: data as Type[],
+      columns: columns,
+    });
   return (
     <>
       {caption && <caption className='m-1.5 text-2xl'>{caption}</caption>}
       <table className='table'>
-        <Head columns={columns} />
-        <Body columns={columns} data={data} />
+        <TableHead<Type>
+          columns={columns}
+          handleSort={handleSort}
+          sortColumn={sortColumn}
+          sortDirection={sortDirection}
+        />
+        <TableBody<Type> data={sortedData} columns={columns} />
       </table>
     </>
   );

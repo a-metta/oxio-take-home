@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   margin: 0;
@@ -15,34 +16,26 @@ table tr {
 table th,
 td {
   padding: 0.75rem;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 table th {
   font-weight: bold;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
-  table {
-    border: 0;
-  }
-
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    display: block;
-  }
+  table tr,
   table td {
     display: block;
+  }
+
+  table th {
+    display: inline-block;
+  }
+  table td {
     text-align: right;
   }
 
