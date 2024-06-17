@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 export type useSortableTableReturnType<T> = {
   sortedData: T[];
   sortColumn: keyof T | undefined;
-  sortDirection: SortDirection;
+  sortDirection: SortDirection | undefined;
   handleSort: (column: keyof T) => void;
 };
 
 export function useSortableTable<T>({
   data,
-  defaultSortDirection = 'asc',
 }: SortableTable<T>): useSortableTableReturnType<T> {
   const [sortedData, setSortedData] = useState<T[]>([]);
   const [sortColumn, setSortColumn] = useState<keyof T | undefined>(undefined);
-  const [sortDirection, setSortDirection] =
-    useState<SortDirection>(defaultSortDirection);
+  const [sortDirection, setSortDirection] = useState<SortDirection | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (sortColumn && !!data) {

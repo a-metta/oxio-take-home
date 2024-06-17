@@ -18,5 +18,4 @@ export type SortableTable<T> = {
   data: T[];
   columns: SortableTableColumn<T>[];
   defaultSortDirection?: SortDirection;
-  defaultSortColumn?: keyof T;
 };
