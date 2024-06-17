@@ -15,6 +15,8 @@ type UserForm = {
   lng: { value: string };
 };
 
+export const successMessage = 'User added successfully!';
+
 function UserForm({
   handleSubmit,
 }: {
@@ -105,7 +107,7 @@ function UserForm({
         <label htmlFor='lng'>Longitude</label>
         <input id='lng' type='text' placeholder='Longitude' required />
       </div>
-      {success && <div className='success'>User added successfully!</div>}
+      {success && <div className='success'>{successMessage}</div>}
       <button type='submit'>Submit</button>
     </form>
   );

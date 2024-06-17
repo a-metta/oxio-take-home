@@ -1,21 +1,26 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent, { UserEvent } from '@testing-library/user-event';
-import UserForm from './UserForm';
+import UserForm, { successMessage } from './UserForm';
 
 describe('UserForm', () => {
   test('renders form fields and submit button', () => {
+    const formElements = [
+      'Name',
+      'Username',
+      'Email',
+      'Phone',
+      'Website',
+      'Company',
+      'City',
+      'Street',
+      'Latitude',
+      'Longitude',
+    ];
     render(<UserForm handleSubmit={() => {}} />);
 
-    expect(screen.getByLabelText('Name')).toBeInTheDocument();
-    expect(screen.getByLabelText('Username')).toBeInTheDocument();
-    expect(screen.getByLabelText('Email')).toBeInTheDocument();
-    expect(screen.getByLabelText('Phone')).toBeInTheDocument();
-    expect(screen.getByLabelText('Website')).toBeInTheDocument();
-    expect(screen.getByLabelText('Company')).toBeInTheDocument();
-    expect(screen.getByLabelText('City')).toBeInTheDocument();
-    expect(screen.getByLabelText('Street')).toBeInTheDocument();
-    expect(screen.getByLabelText('Latitude')).toBeInTheDocument();
-    expect(screen.getByLabelText('Longitude')).toBeInTheDocument();
+    formElements.forEach((label) => {
+      expect(screen.getByLabelText(label)).toBeInTheDocument();
+    });
 
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
@@ -39,40 +44,6 @@ describe('UserForm', () => {
       user = userEvent.setup();
     });
 
-    test('calls handleSubmit with user data on form submission', async () => {
-      const handleSubmitMock = vi.fn();
-      render(<UserForm handleSubmit={handleSubmitMock} />);
-
-      for (const [key, value] of Object.entries(mockUserData)) {
-        await user.type(screen.getByLabelText(key), value);
-      }
-
-      screen.getByText('Submit').click();
-
-      expect(handleSubmitMock).toHaveBeenCalledWith({
-        name: mockUserData.Name,
-        username: mockUserData.Username,
-        email: mockUserData.Email,
-        phone: mockUserData.Phone,
-        website: mockUserData.Website,
-        company: {
-          name: mockUserData.Company,
-          catchPhrase: 'someCatchPhrase',
-          bs: 'some',
-        },
-        address: {
-          street: mockUserData.Street,
-          suite: 'someSuite',
-          city: mockUserData.City,
-          zipcode: 'someZipcode',
-          geo: {
-            lat: mockUserData.Latitude,
-            lng: mockUserData.Longitude,
-          },
-        },
-      });
-    });
-
     test('does not call handleSubmit when required fields are missing', () => {
       const handleSubmitMock = vi.fn();
       render(<UserForm handleSubmit={handleSubmitMock} />);
@@ -82,19 +53,64 @@ describe('UserForm', () => {
       expect(handleSubmitMock).not.toHaveBeenCalled();
     });
 
-    test('clears form fields after submission', async () => {
+    describe('submits and clears form', () => {
       const handleSubmitMock = vi.fn();
-      render(<UserForm handleSubmit={handleSubmitMock} />);
+      beforeEach(async () => {
+        render(<UserForm handleSubmit={handleSubmitMock} />);
 
-      for (const [key, value] of Object.entries(mockUserData)) {
-        await user.type(screen.getByLabelText(key), value);
-      }
+        await act(async () => {
+          for (const [key, value] of Object.entries(mockUserData)) {
+            await user.type(screen.getByLabelText(key), value);
+          }
+        });
+      });
 
-      screen.getByText('Submit').click();
+      test('calls handleSubmit with user data on form submission', () => {
+        act(() => {
+          screen.getByText('Submit').click();
+        });
 
-      for (const key of Object.keys(mockUserData)) {
-        expect(screen.getByLabelText(key)).toHaveValue('');
-      }
+        expect(handleSubmitMock).toHaveBeenCalledWith({
+          name: mockUserData.Name,
+          username: mockUserData.Username,
+          email: mockUserData.Email,
+          phone: mockUserData.Phone,
+          website: mockUserData.Website,
+          company: {
+            name: mockUserData.Company,
+            catchPhrase: 'someCatchPhrase',
+            bs: 'some',
+          },
+          address: {
+            street: mockUserData.Street,
+            suite: 'someSuite',
+            city: mockUserData.City,
+            zipcode: 'someZipcode',
+            geo: {
+              lat: mockUserData.Latitude,
+              lng: mockUserData.Longitude,
+            },
+          },
+        });
+      });
+
+      test('shows a success message after submission', () => {
+        act(() => {
+          screen.getByText('Submit').click();
+        });
+
+        expect(screen.getByText(successMessage)).toBeInTheDocument();
+      });
+
+      test('clears form fields after submission', () => {
+        act(() => {
+          screen.getByText('Submit').click();
+        });
+
+        for (const key of Object.keys(mockUserData)) {
+          expect(screen.getByLabelText(key)).toHaveValue('');
+        }
+      });
     });
   });
 });
