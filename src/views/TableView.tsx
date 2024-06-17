@@ -5,6 +5,7 @@ import { useUsers } from '@hooks/useUsers';
 const usersColumns = [
   { key: 'id', label: 'ID' },
   { key: 'name', label: 'Name' },
+  { key: 'username', label: 'Username' },
   { key: 'email', label: 'Email' },
   { key: 'phone', label: 'Phone' },
   { key: 'website', label: 'Website' },
