@@ -19,13 +19,15 @@ function Modal({
   return (
     <div className='modal'>
       <div className='modal-content'>
-        <span
+        <button
           className='close-button'
           data-testid='modal-close-button'
+          type='button'
+          title='Modal Close Button'
           onClick={onClose}
         >
           <FaRegCircleXmark />
-        </span>
+        </button>
         {children}
       </div>
     </div>

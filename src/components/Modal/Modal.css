@@ -25,5 +25,7 @@
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-  color: #;
+  background-color: transparent;
+  padding: 0;
+  border: none;
 }

@@ -20,8 +20,12 @@ function TableHead<Type>({
             key={column.key as Key}
             onClick={() => handleSort(column.key)}
             className='cursor-pointer'
+            scope='col'
+            {...((column.key as Key) === sortColumn && {
+              'aria-sort': sortDirection === 'asc' ? 'ascending' : 'descending',
+            })}
           >
-            <div className='flex align-middle'>
+            <div className='flex justify-center align-middle'>
               {column.label}
               <div className='ml-3 mt-1'>
                 {(column.key === sortColumn &&

@@ -22,6 +22,7 @@ function TableView() {
       {!!users && (
         <div className='mt-8'>
           <SortableTable
+            caption='Users Table'
             data={users.map((user) => {
               return {
                 ...user,
