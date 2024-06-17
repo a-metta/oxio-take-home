@@ -21,7 +21,7 @@ function MapView() {
       <h1>Users Geographical Distribution</h1>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''}>
         <GoogleMap
-          style={{ width: '100vw', height: '100vh' }}
+          style={{ width: '100vw', height: '100vh', marginTop: '1rem' }}
           defaultCenter={{ lat: 22.54992, lng: 0 }}
           defaultZoom={3}
           gestureHandling={'greedy'}
