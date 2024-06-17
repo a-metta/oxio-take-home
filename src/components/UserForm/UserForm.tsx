@@ -21,9 +21,10 @@ function UserForm({
 }) {
   return (
     <form
-      onSubmit={(e: React.SyntheticEvent) => {
+      onSubmit={(e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const target = e.target as typeof e.target & UserForm;
+        const target = e.currentTarget
+          .elements as typeof e.currentTarget.elements & UserForm;
         handleSubmit({
           name: target.name.value,
           username: target.username.value,
@@ -46,6 +47,7 @@ function UserForm({
             },
           },
         });
+        e.currentTarget.reset();
       }}
     >
       <div>
