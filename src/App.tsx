@@ -51,7 +51,6 @@ function App() {
                   id: `${data.length + 1}`,
                 },
               ]);
-              setIsModalOpen(false);
             }}
           />
         </div>
