@@ -16,7 +16,6 @@ function App() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response: Response) => response.json())
       .then((data: UsersData) => {
-        console.log(data);
         setData(data);
       })
       .catch((error: Error) => console.error(error));
@@ -24,7 +23,10 @@ function App() {
 
   return (
     <div>
-      <nav className='flex flex-auto flex-row justify-between align-middle'>
+      <nav
+        role='navigation'
+        className='flex flex-auto flex-row justify-between align-middle'
+      >
         <ul className='mr-10 flex'>
           <li className=''>
             <Link to={`table`}>Table</Link>
@@ -54,7 +56,7 @@ function App() {
           />
         </div>
       </Modal>
-      <div>
+      <main role='main'>
         {location.pathname === '/' && (
           <>
             <h1 className='mt-8 text-center text-4xl'>
@@ -69,7 +71,7 @@ function App() {
           </>
         )}
         <Outlet context={{ users: data } satisfies ContextType} />
-      </div>
+      </main>
     </div>
   );
 }

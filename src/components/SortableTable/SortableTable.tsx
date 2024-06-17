@@ -20,8 +20,10 @@ function SortableTable<Type extends TableDataEntry>({
     });
   return (
     <>
-      {caption && <caption className='m-1.5 block text-2xl'>{caption}</caption>}
       <table className='table'>
+        {caption && (
+          <caption className='m-1.5 block text-2xl'>{caption}</caption>
+        )}
         <TableHead<Type>
           columns={columns}
           handleSort={handleSort}
