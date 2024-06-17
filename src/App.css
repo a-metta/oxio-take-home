@@ -9,10 +9,9 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  cursor: pointer;
 }
 
-#root nav ul li:hover {
+#root nav ul li a:hover {
   background-color: #036bfc;
   color: #ffffff;
 }

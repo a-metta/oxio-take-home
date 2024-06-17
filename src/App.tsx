@@ -28,7 +28,7 @@ function App() {
         className='flex flex-auto flex-row justify-between align-middle'
       >
         <ul className='mr-10 flex'>
-          <li className=''>
+          <li>
             <Link to={`table`}>Table</Link>
           </li>
           <li className='ml-4'>
