@@ -1,4 +1,5 @@
 import { User } from '@customTypes/users';
+import { useEffect, useState } from 'react';
 import './UserForm.css';
 
 type UserForm = {
@@ -19,6 +20,18 @@ function UserForm({
 }: {
   handleSubmit: (user: Omit<User, 'id'>) => void;
 }) {
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSuccess(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [success]);
+
   return (
     <form
       onSubmit={(e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -47,7 +60,9 @@ function UserForm({
             },
           },
         });
+
         e.currentTarget.reset();
+        setSuccess(true);
       }}
     >
       <div>
@@ -90,6 +105,7 @@ function UserForm({
         <label htmlFor='lng'>Longitude</label>
         <input id='lng' type='text' placeholder='Longitude' required />
       </div>
+      {success && <div className='success'>User added successfully!</div>}
       <button type='submit'>Submit</button>
     </form>
   );

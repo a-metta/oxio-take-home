@@ -27,3 +27,10 @@ form button {
   margin: auto;
   width: 120px;
 }
+
+form .success {
+  color: green;
+  margin: 0.5rem auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
