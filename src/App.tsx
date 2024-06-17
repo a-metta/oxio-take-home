@@ -24,9 +24,9 @@ function App() {
 
   return (
     <div>
-      <nav>
-        <ul className='flex flex-auto flex-row justify-center'>
-          <li>
+      <nav className='flex flex-auto flex-row justify-between align-middle'>
+        <ul className='mr-10 flex'>
+          <li className=''>
             <Link to={`table`}>Table</Link>
           </li>
           <li className='ml-4'>

@@ -4,3 +4,14 @@
   width: 100vw;
   height: 100vh;
 }
+
+#root nav ul li {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+#root nav ul li:hover {
+  background-color: #f0f0f0;
+}
