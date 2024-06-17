@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import ChartView from './views/ChartView';
+import MapView from './views/MapView';
 import TableView from './views/TableView';
 
 const router = createBrowserRouter([
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         Component: TableView,
       },
       {
-        path: 'chart',
-        Component: ChartView,
+        path: 'map',
+        Component: MapView,
       },
     ],
   },

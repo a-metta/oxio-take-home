@@ -10,6 +10,8 @@ type UserForm = {
   company: { value: string };
   city: { value: string };
   street: { value: string };
+  lat: { value: string };
+  lng: { value: string };
 };
 
 function UserForm({
@@ -39,8 +41,8 @@ function UserForm({
             city: target.city.value,
             zipcode: 'someZipcode',
             geo: {
-              lat: 'someLat',
-              lng: 'someLng',
+              lat: target.lat.value,
+              lng: target.lng.value,
             },
           },
         });
@@ -77,6 +79,14 @@ function UserForm({
       <div>
         <label htmlFor='street'>Street</label>
         <input id='street' type='text' placeholder='Street' required />
+      </div>
+      <div>
+        <label htmlFor='lat'>Latitude</label>
+        <input id='lat' type='text' placeholder='Latitude' required />
+      </div>
+      <div>
+        <label htmlFor='lng'>Longitude</label>
+        <input id='lng' type='text' placeholder='Longitude' required />
       </div>
       <button type='submit'>Submit</button>
     </form>
